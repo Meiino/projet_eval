@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+
+
+
+{% block body %}
+
+    <h1 class="text-center mb-4">Liste des employés</h1>
+
+    {% for message in app.flashes('success' ) %}
+        <div class="alert-success">
+            {{ message }}
+        </div>    
+    {% endfor %}
+
+    <div class="container mt-4">
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Numéro</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Date de naissance</th>
+                    <th scope="col">Téléphone</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Poste</th>
+                    <th scope="col">Salaire</th>
+                    <th scope="col">Modification</th>
+                    <th scope="col">Suppression</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for employe in employes %}
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>{{ employe.prenom }}</td>
+                        <td>{{ employe.nom }}</td>
+                        <td>{{ employe.datedenaissance|date('d/m/Y') }}</td>
+                        <td>{{ employe.telephone }}</td>
+                        <td>{{ employe.adresse }}</td>
+                        <td>{{ employe.email }}</td>
+                        <td>{{ employe.poste }}</td>
+                        <td>{{ employe.salaire }}</td>
+                        <td><a href="{{ path('edit_employes' , { id: employes.id}) }}" class="btn btn-warning">Modifier</a></td>
+                        <td><a href="{{ path('delete_employes' , {id: employes.id}) }}" class="btn btn-danger"></a>Supprimer</td>
+                    </tr>           
+                {% endfor %}                      
+                </tbody>
+            </table>  
+        </div>        
+    </div>
+
+{% endblock %}
